@@ -16,8 +16,7 @@ pipeline {
          stage('Install Docker on slave through Ansible playbook') {
             agent{ label 'slave'}
             steps {
-                sh "sudo /opt/puppetlabs/bin/puppet module install garethr-docker"
-                sh "sudo /opt/puppetlabs/bin/puppet apply /home/jenkins/jenkins_slave/workspace/Certification/dockerce.pp"
+              ansiblePlaybook credentialsId: 'Docker_Deployment_Server', disableHostKeyChecking: true, installation: 'ansible2', inventory:               		'/home/ubuntu/ansible/dev.inv', playbook: '/home/ubuntu/ansible/InstallDocker.yml'
             }
         }
 
