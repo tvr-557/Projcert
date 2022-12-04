@@ -35,15 +35,12 @@ pipeline {
                 sh "cd /home/jenkins/Certification && sudo docker build -t test ."
                 sh "sudo docker run -it -d --name webapp -p 1998:80 test"
             }
-        }
-
-	
         post {
                 failure {
                     sh "echo Failure"
 					sh "sudo docker rm -f webapp"
                 }
 	  }
-	}
-  }
-}
+   }
+ }
+
